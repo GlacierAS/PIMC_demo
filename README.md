@@ -80,7 +80,7 @@ $$
 \braket{ \hat{O}  }= \frac{1}{Z}\sum_{n} P(E_{n})\braket{ n | \hat{O}|n } 
 $$
 
-We are working in the energy Eigenspace. Usually, we will start with some energy spectrum $E_{n}$ and do calculations with it. But many of the time solving for $E_n$ require finding a solution to Schrodinger's equation with some crazy Hamiltonian:
+We are working in the energy Eigenspace. Usually, we will start with some energy spectrum $E_{n}$ and do calculations with it. But usually solving for $E_n$ requires finding a solution to Schrodinger's equation with some crazy Hamiltonian:
 
 $$
 \hat{H} = -\frac{\hbar^2}{2m}\sum_{i}\nabla^2_{i}+\sum_{i}V_{ext}(\vec{r}_{i})+\sum_{i<j} \frac{q_{i}q_{j}}{|\vec{r}_{i}-\vec{r}_{j}|}
@@ -286,8 +286,10 @@ Implementation:
 
 # Verify correctness of Metropolis
 For a sanity check, we try to test the result on a quantum H.O.
+
 ## Quantum H.O.
 The Hamiltonian is,
+
 $$
 \hat{H}=\frac{\hat{p}^2}{2m}+\frac{m\omega^2\hat{x}^2}{2}
 $$
