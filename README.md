@@ -12,9 +12,11 @@ https://www-zeuthen.desy.de/~kjansen/lattice/qcd/miscellaneous/CreutzFreedman.pd
 
 # Preliminary
 In PHYS 551 Quantum Theory (McGill University) we have discussed of the propagator
+
 $$
 \braket{ x_{f}, t_{f} |x_{i},t_{i}  }= \braket{ x_{f} |\exp(-i\hat{H}\Delta t/\hbar) |x_{i} } 
 $$
+
 which gives the probability amplitude of particle at position $x_{i}$ transiting to $x_{f}$ in the time $\Delta t=t_{f}-t_{i}$. 
 
 Recall when we derived it we considered infinitesimal time $\Delta t=\delta t$ and calculated the short time propagator, by inserting completeness $\mathbf{1}=\int \frac{dp}{2\pi \hbar}\ket{p} \bra{p}$.
