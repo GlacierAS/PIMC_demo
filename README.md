@@ -33,88 +33,122 @@ $$
 L=\frac{m}{2}\left( \frac{dx}{dt} \right)^2-V(x_{i})
 $$
 
-We do it by slicing time into many small $\delta t$ slices to write the propagator as a series of short time propagator, and insert position completeness to them:  
+We do it by slicing time into many small $\delta t$ slices to write the propagator as a series of short time propagator, and insert position completeness to them:
 
 $$
 \braket{ x_{f},t_{f} | x_{i}, t_{i} }=\int \prod_{i}dx_{i}\braket{ x_{i+1},t_{i+1} |x_{i},t_{i}  }
 $$
+
 Expanding the short time propagator with momentum completeness, taking a limit as$N\to \infty$ give,
+
 $$
 \braket{ x_{f} ,t_{f}| x_{i},t_{i} } = \int \mathcal Dx(t)\exp(-iS/\hbar)
+
 $$
 where $\mathcal Dx(t)=\lim_{ n \to \infty }\prod_{n=1}^{N-1}dx_{i}$ and
+
 $$
 S=\int_{t_{i}}^{t_{f}}L(x(t))dt=\int_{t_{i}}^{t_{f}}\left( \frac{m}{2}\left( \frac{dx}{dt} \right)^2-V(x(t)) \right)dt
 $$
+
 It is the sum of the Lagrangians of short-time propagators. Path integral is all nice, but notoriously difficult to solve for. And unfortunately, even using Monte Carlo, this is still not feasible due to the oscillatory convergence exponential. $\exp(-iS/\hbar)$.
 
 # Imaginary Time Path Integral
 So path integral for the purpose of multiple particles and how particles interact with their environment, so we should think about things in the stat mech way. The goal here is to reformulate stat mech into path integral.
 
 Recall the stat mech probability of a system in a state with energy $E_{n}$ called the Boltzmann factor,
+
 $$
 P(E_{n})=\frac{1}{Z}\exp(-E_{n}\beta )
 $$
+
 You probably have seen the partition function, (where $\beta=1/k_{B}T$), which is the normalization factor
+
 $$
 Z=\sum_{n}\exp(-\beta E_{n})
 $$
+
 And the observable,
+
 $$
 \braket{ \hat{O}  }= \frac{1}{Z}\sum_{n} \exp(-E_{n}\beta)\braket{ n | \hat{O}|n } 
 $$
+
 More generally,
+
 $$
 \braket{ \hat{O}  }= \frac{1}{Z}\sum_{n} P(E_{n})\braket{ n | \hat{O}|n } 
 $$
+
 We are working in the energy Eigenspace. Usually, we will start with some energy spectrum $E_{n}$ and do calculations with it. But many of the time solving for $E_n$ require finding a solution to Schrodinger's equation with some crazy Hamiltonian:
+
 $$
 \hat{H} = -\frac{\hbar^2}{2m}\sum_{i}\nabla^2_{i}+\sum_{i}V_{ext}(\vec{r}_{i})+\sum_{i<j} \frac{q_{i}q_{j}}{|\vec{r}_{i}-\vec{r}_{j}|}
 $$
+
 (Urrh, ugly...) The first term is kinetic energy for n particles. The second term is the external potential applied to any particle. The third term is the Columb interaction between the charges.
+
 $$
 i\hbar  \frac{ \partial  }{ \partial t }\psi(\vec{x},t)=\hat{H}\psi(\vec{x},t)
 $$
+
 (You don't want to solve this)
 
 The partition function is particularly useful because it tells us the free energy
+
 $$
 F=-\frac{1}{\beta}\ln Z
 $$
+
 Internal energy
+
 $$
 \braket{  E }_{\beta} =-\frac{ \partial }{ \partial \beta}\ln Z 
 $$
+
 BUT, the partition function is almost always impossible to find (unless we have some really good systems analytically). And no, of course, our monte Carlo algorithm that I will talk about later is impractical to find $Z$ as well. There is, however, a way to find expectation values bypassing the need for $Z$.
 
 We can write $Z$ and $\braket{  \hat{O} }$ in canonical form where $\exp(-\beta E_{n})=\braket{ n | \exp(-\beta \hat{H})|n }$ hence
+
 $$
 Z=\sum_{n}\braket{ n | \exp(-\beta \hat{H}) |n} =\mathrm{Tr}(\exp(-\beta \hat{H}))
 $$
+
 and, to be more general, we can insert arbitrary basis completeness, in case $\hat{O}$ depends on other bases.
+
 $$
 \braket{ \hat{O}  }= \frac{1}{Z}\sum_{n,m} \braket{ n | \exp(-\beta \hat{H}) |m}\braket{ m| \hat{O}|n } =\frac{\mathrm{Tr}(\exp(-\beta \hat{H})\hat{O})}{\mathrm{Tr}(\exp(-\beta \hat{H}))}
 $$
+
 Now let's do it in position basis, because the trace is invariant under a change of basis.
+
 $$
 Z=\int \braket{ x | \exp(-\beta\hat{H})|x }dx = \mathrm{Tr}(\exp(-\beta\hat{H}))
 $$
+
 and,
+
 $$
 \braket{ \hat{O}  }= \frac{1}{Z}\int dx' \int dx \braket{ x' | \exp(-\beta \hat{H}) |x}\braket{ x'| \hat{O}|x } =\frac{\mathrm{Tr}(\exp(-\beta \hat{H})\hat{O})}{\mathrm{Tr}(\exp(-\beta \hat{H}))}
 $$
+
 If $\hat{O}(\hat{x})$, i.e. $\hat{O}$ is a function of $\hat{x}$ then we can easily show $\braket{ x' | \hat{O}(\hat{x}) |x }=\braket{ x' | (O(x)|x })=O(x)\braket{ x' | x }=O(x)\delta_{xx'}$ 
 is diagonal. So we can simplify to,
+
 $$
 \braket{ \hat{O}  }= \frac{1}{Z} \int dx \braket{ x | \exp(-\beta \hat{H}) |x}O(x)=\frac{\int dx \braket{ x | \exp(-\beta \hat{H}) |x}O(x) }{\int dx \braket{ x | \exp(-\beta\hat{H})|x }}
 $$
+
 Notice in these expression it contains $\braket{ x | \exp(-\beta\hat{H})|x }$ if a subsitution: we let $\tau=\hbar/k_{B}T=\hbar\beta$
+
 $$
 \braket{ x | \exp(-(\tau/\hbar)\hat{H})|x } 
 $$
+
  $\braket{ x | \exp(-\hat{H}\tau/\hbar)|x }$ looks like a propagator with $\tau=-it$. i.e. the __density matrix__ is the imaginary time propagator. So the partition function is the integral over real space of all CLOSED ($x_{i}=x_{f}=x$) path integrals in the space. Although, it is still almost impossible to find $Z$ numerically, say we discretize $x$ into $X$ points and for each path we have $N_{\tau}$ points, the integration domain is $O(X^{N_{\tau}})$ and even a stochastic approach of Monte Carlo cant nicely estimate exponential path it.
 
 Let's look at the integrand... Well, we can follow the same logic as the regular PI, with the substitutions with __Wick Rotation__:
+
 $$
 \begin{align}
 t  & \to - i \tau\\ 
@@ -122,11 +156,19 @@ t  & \to - i \tau\\
 dt  & \to - i d\tau
 \end{align}
 $$
+
 Now
+
 $$
 \frac{dx}{dt}\to\frac{dx}{d\tau} \frac{d\tau}{dt}\to i \frac{dx}{d\tau}
 $$
-so $$\left( \frac{dx}{dt} \right)^2 \to-\left( \frac{dx}{d\tau} \right)^2$$The short time propagator becomes,
+
+so 
+
+$$
+\left( \frac{dx}{dt} \right)^2 \to-\left( \frac{dx}{d\tau} \right)^2
+$$
+The short-time propagator becomes,
 $$
 \braket{ x_{f},\tau_{i}+\delta \tau | x_{i},\tau_{i} }=\sqrt{ \frac{m}{2\pi \hbar \tau} }\exp\left( \frac{L_{E}\delta \tau}{\hbar}\right)  
 $$
