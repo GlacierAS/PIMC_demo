@@ -22,14 +22,23 @@ which gives the probability amplitude of particle at position $x_{i}$ transiting
 Recall when we derived it we considered infinitesimal time $\Delta t=\delta t$ and calculated the short time propagator, by inserting completeness $\mathbf{1}=\int \frac{dp}{2\pi \hbar}\ket{p} \bra{p}$.
 
 Which gives
+
 $$
 \braket{ x_{f}, t_{i}+\delta t |x_{i},t_{i}}=\sqrt{ \frac{m}{2\pi \hbar i\delta t} }\exp\left( \frac{iL\delta t}{\hbar}\right)  
 $$
+
 where,
+
 $$
 L=\frac{m}{2}\left( \frac{dx}{dt} \right)^2-V(x_{i})
 $$
-We do it by slicing time into many small $\delta t$ slices to write the propagator as a series of short time propagator, and insert position completeness to them:  $$\braket{ x_{f},t_{f} | x_{i}, t_{i} }=\int \prod_{i}dx_{i}\braket{ x_{i+1},t_{i+1} |x_{i},t_{i}  }$$Expanding the short time propagator with momentum completeness, taking a limit as$N\to \infty$ give,
+
+We do it by slicing time into many small $\delta t$ slices to write the propagator as a series of short time propagator, and insert position completeness to them:  
+
+$$
+\braket{ x_{f},t_{f} | x_{i}, t_{i} }=\int \prod_{i}dx_{i}\braket{ x_{i+1},t_{i+1} |x_{i},t_{i}  }
+$$
+Expanding the short time propagator with momentum completeness, taking a limit as$N\to \infty$ give,
 $$
 \braket{ x_{f} ,t_{f}| x_{i},t_{i} } = \int \mathcal Dx(t)\exp(-iS/\hbar)
 $$
