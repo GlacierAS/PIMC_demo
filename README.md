@@ -1,17 +1,10 @@
 # PIMC_demo
 A demo for Path Integral Monte Carlo
 
-This presentation will be dedicated to the primary application of the path integral. 
-https://pitp.phas.ubc.ca/confs/sherbrooke2014/archives/pimc_notes_DelMaestro.pdf
-
-https://arxiv.org/pdf/1712.08508
-
-https://people.physics.illinois.edu/Ceperley/papers/095.pdf
-
-https://www-zeuthen.desy.de/~kjansen/lattice/qcd/miscellaneous/CreutzFreedman.pdf (M. Creutz and B. Freedman, 1980)
+This is the presentation node + code for PHYS551 Final, dedicated to an application of Path Integral, tested upon Quantum Harmonic Oscillator
 
 # Preliminary
-In PHYS 551 Quantum Theory (McGill University) we have discussed of the propagator
+In PHYS 551 Quantum Theory (McGill University), we have discussed the propagator
 
 $$
 \braket{ x_{f}, t_{f} |x_{i},t_{i}  }= \braket{ x_{f} |\exp(-i\hat{H}\Delta t/\hbar) |x_{i} } 
