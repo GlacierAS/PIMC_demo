@@ -265,13 +265,15 @@ $$
 # Metropolis-Hastening Algorithm
 Our goal is to find $Z$; in doing so, we need to generate many paths via the Metropolis algorithm. These path should have probability of $P=\exp\left( -\frac{S_{E}}{\hbar} \right)$.
 1. Pick a random path $x^{(0)}=(x_{0},\dots,x_{N_{\tau}})$ with periodic condition $x_{0}=x_{N_\tau}$
-2. Propose a perturbed path, $x'_{j}=x_{j}+\delta$ so $x^{(k)}=(x_{0},\dots,x_{j-1},x_{j}',x_{j+1},\dots,x_{N_{\tau}})$.
+2. Propose a perturbed path, $x'_{j} = x_{j}+ \delta$ so $x^{(k)}=(x_{0},\dots,x_{j-1},x_{j}',x_{j+1},\dots,x_{N_{\tau}})$.
 3. Calculate the acceptance probability $A=\min\left( 1, \exp\left( -\frac{\Delta S_{E}}{\hbar} \right) \right)$
 If we proposed a path with a lower action than exp > 1, then the path is a more favourable configuration.
 If the path has a higher action than exp < 1. The path is less favourable, so we accept it with lower probability
+
 $$
 x^{(0)}\to x^{(1)}\to x^{(2)}\to x^{(3)}\to x^{(4)}\to x^{(5)}\to x^{(6)}\to x^{(7)}\to x^{(8)}\to x^{(9)}\to x^{(10)}\to\dots
 $$
+
 Implementation:
 - Thermalization (remove the first few paths) because the  original path is random, we almost never start with the correct distribution.
 - Reduce correlation between paths, so they become more independent.
