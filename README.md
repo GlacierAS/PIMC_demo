@@ -1,7 +1,15 @@
 # PIMC_demo
 A demo for Path Integral Monte Carlo
 
-This is the presentation node + code for PHYS551 Final, dedicated to an application of Path Integral, tested upon Quantum Harmonic Oscillator
+Code requirement:
+python
+numpy
+matplotlib
+tqdm
+
+
+
+This is the presentation node + code for PHYS551 Final, dedicated to an application of Path Integral, tested upon the Quantum Harmonic Oscillator
 
 # Preliminary
 In PHYS 551 Quantum Theory (McGill University), we have discussed the propagator
