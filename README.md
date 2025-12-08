@@ -425,8 +425,8 @@ $$
 
 More thorough analysis needed...
 
-Some of the expression we try to aim, moving furthur:
-Multiple Particles:
+Some of the expressions we try to aim for moving further:
+Multiple Particles (Distinguishable)
 
 $$
 Z_\mathrm{MB} = \int \prod_{i=1}^{N} \prod_{j=1}^{N_\tau} dx_i^j \; 
