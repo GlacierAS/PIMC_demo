@@ -101,7 +101,7 @@ $$
 
 BUT, the partition function is almost always impossible to find (unless we have some really good systems analytically). And no, of course, our monte Carlo algorithm that I will talk about later is impractical to find $Z$ as well. There is, however, a way to find expectation values bypassing the need for $Z$.
 
-We can write $Z$ and $\braket{  \hat{O} }$ in canonical form where $\exp(-\beta E_{n})=\braket{ n | \exp(-\beta \hat{H})|n }$ hence
+We can write $Z$ and $\braket{  \hat{O} }$ in canonical form  $\exp(-\beta E_{n})=\braket{ n | \exp(-\beta \hat{H})|n }$ hence
 
 $$
 Z=\sum_{n}\braket{ n | \exp(-\beta \hat{H}) |n} =\mathrm{Tr}(\exp(-\beta \hat{H}))
@@ -168,7 +168,7 @@ $$
 \braket{ x_{f},\tau_{i}+\delta \tau | x_{i},\tau_{i} }=\sqrt{ \frac{m}{2\pi \hbar \tau} }\exp\left( \frac{L_{E}\delta \tau}{\hbar}\right)  
 $$
 
-where $L$ become $L_{E}$ defined as as,
+ $L$ become $L_{E}$ defined as as,
 
 $$
 L_{E}=\frac{m}{2}\left( \frac{dx}{d\tau} \right)^2+V(x(\tau))
@@ -242,7 +242,7 @@ $$\braket{  f }\approx\frac{1}{N}\sum_{i}f(x_{i})$$
 then
 
 $$
- \frac{1}{N}\sum_{i} \frac{f(x_{i})}{P_{\text{uniform}}(x_{i})} \approx \int_{a}^b dxf(x) \;\;\; \text{where} \, P_{\text{uniform}}(x_{i})=\frac{1}{b-a}
+ \frac{1}{N}\sum_{i} \frac{f(x_{i})}{P_{\text{uniform}}(x_{i})} \approx \int_{a}^b dxf(x) \text{   where   }  P_{\text{uniform}}(x_{i})=\frac{1}{b-a}
 $$
 
 There is no reason to sample uniformly for an arbitrary probability.
@@ -256,10 +256,6 @@ Hence,
 
 $$
 \braket{ \hat{O}  } _{\beta}\approx \frac{1}{N_{\text{samples}}}\sum_{i=1}^{N_{\text{samples}}}\braket{  \hat{O}(x_{i}(\tau)) } =\braket{ \hat{O}  } _{\beta}\approx \frac{1}{N_{\text{samples}}}\sum_{i=1}^{N_{\text{samples}}}\frac{1}{N_{\tau}} \sum_{\tau=1}^{N_{\tau}}\braket{  \hat{O} }_{\text{time slice}} 
-$$
-
-$$
-\braket{  \hat{O}(x_{i}(\tau)) }=
 $$
 
 # Metropolis-Hastening Algorithm
@@ -319,7 +315,7 @@ $$
 Z=\sum_{n}\exp(-\beta E_{n})=\sum_{n}\exp\left( -\beta \hbar\omega\left( n+\frac{1}{2} \right) \right)=\exp\left( -\frac{\beta \hbar\omega}{2} \right)\sum_{n}\exp\left( -\beta \hbar\omega n \right)=\frac{\exp\left( -\frac{\beta \hbar\omega}{2} \right)}{1-\exp(-\beta \hbar\omega)}
 $$
 
-The second term is a geometric serie,s so
+The second term is a geometric series, so
 
 $$
 Z=\frac{\exp\left( -\frac{\beta \hbar\omega}{2} \right)}{1-\exp(-\beta \hbar\omega)}
@@ -359,7 +355,7 @@ In summary
 | $\braket{  x^2 }_{\beta}$ | $\frac{\hbar}{2m\omega}\coth\left( \frac{\beta \hbar\omega}{2} \right)$ |
 
 ## PIMC on Thermal H.O.
-Now lets do it with PIMC
+Now let's do it with PIMC
 
 $$
 Z=\int\prod_{i}dx(\tau_{i}) \sqrt{ \frac{m}{2\pi \hbar\delta \tau} }\exp\left( -\frac{\delta \tau}{\hbar}\sum_{i} \left( \frac{m}{2}\left( \frac{x_{i+1}-x_{i}}{\delta \tau} \right)^2+\frac{m\omega^2x_{i}^2}{2} \right) \right)
@@ -428,3 +424,35 @@ Z_{s}=1+\exp(-E\beta+\mu\beta)
 $$
 
 More thorough analysis needed...
+
+Some of the expression we try to aim, moving furthur:
+Multiple Particles:
+
+$$
+Z_\mathrm{MB} = \int \prod_{i=1}^{N} \prod_{j=1}^{N_\tau} dx_i^j \; 
+\left(\frac{m}{2\pi \hbar \delta\tau}\right)^{N/2} 
+\exp \Biggl[ - \frac{\delta\tau}{\hbar} \sum_{i=1}^{N} \sum_{j=1}^{N_\tau} 
+\left( \frac{m}{2} \left( \frac{x_i^{j+1} - x_i^j}{\delta\tau} \right)^2 + V(x_i^j) \right) \Biggr]
+$$
+
+Bosons:
+
+$$
+Z_B = \frac{1}{N!} \sum_{P \in S_N} 
+\int \prod_{i=1}^{N} \prod_{j=1}^{N_\tau} dx_i^j \; 
+\left(\frac{m}{2\pi \hbar \delta\tau}\right)^{N/2} 
+\exp \Biggl[ - \frac{\delta\tau}{\hbar} \sum_{i=1}^{N} \sum_{j=1}^{N_\tau} 
+\left( \frac{m}{2} \left( \frac{x_i^{j+1} - x_i^j}{\delta\tau} \right)^2 + V(x_i^j) \right) \Biggr] 
+\prod_{i=1}^{N} \delta(x_i^{N_\tau+1} - x_{P(i)}^1)
+$$
+
+Fermions:
+
+$$
+Z_F = \frac{1}{N!} \sum_{P \in S_N} (-1)^P
+\int \prod_{i=1}^{N} \prod_{j=1}^{N_\tau} dx_i^j \; 
+\left(\frac{m}{2\pi \hbar \delta\tau}\right)^{N/2} 
+\exp \Biggl[ - \frac{\delta\tau}{\hbar} \sum_{i=1}^{N} \sum_{j=1}^{N_\tau} 
+\left( \frac{m}{2} \left( \frac{x_i^{j+1} - x_i^j}{\delta\tau} \right)^2 + V(x_i^j) \right) \Biggr] 
+\prod_{i=1}^{N} \delta(x_i^{N_\tau+1} - x_{P(i)}^1)
+$$
